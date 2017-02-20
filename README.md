@@ -2,7 +2,7 @@
 
 ## About yes
 
-The `yes` command is used to output ***__y__, or whatever word you choose, forever.
+The `yes` command is used to output __y__, or whatever word you choose, forever.
 
 ## Description
 
