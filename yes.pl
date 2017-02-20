@@ -1,12 +1,9 @@
-if ($#ARGV == -1) {
+if (!@ARGV) {
     while (1) {
         print "y\n";
     }
-}else {
+} else {
     while (1) {
-        for ($i = 0; $i < $#ARGV + 1; $i = $i + 1) {
-            print "$ARGV[$i] ";
-        }
-        print "\n";
+        print "@ARGV\n";
     }
 }
