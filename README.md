@@ -34,6 +34,8 @@ y
 
 ## Dangerous yes
 
+### Redirecting output to a file
+
 `yes` can be dangerous also. If you redirect the output stream of `yes` to a file, it will eat up your storage space. :bomb: :bomb:
 
 ```
@@ -45,3 +47,13 @@ $ du -h yes.txt
 ```
 
 I ran the command only for __10 Seconds__. And It consumed almost 1 GB. :boom: :boom:
+
+### Nested yes
+
+`yes` takes an argument and prints it infinitely. What if you take `yes` as argument itself. :boom: :bomb: :boom:
+
+```
+$ yes `yes`
+```
+
+You tell me what happens. :stuck_out_tongue_winking_eye:
