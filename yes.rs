@@ -7,7 +7,7 @@ fn main() {
     match args.len() {
         1 => {
             while true {
-                println!("yes");
+                println!("y");
             }
         },
         _ => {
