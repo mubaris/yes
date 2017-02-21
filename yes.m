@@ -5,7 +5,7 @@ int main() {
 	NSFileHandle* stdout = [NSFileHandle fileHandleWithStandardOutput];
 	NSData* data = nil;
 	if ([args count] == 1) {
-		data = [@"yes\n" dataUsingEncoding: NSUTF8StringEncoding];
+		data = [@"y\n" dataUsingEncoding: NSUTF8StringEncoding];
 	} else {
 		NSRange rn;
 		rn.location = 1;
