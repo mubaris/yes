@@ -1,0 +1,222 @@
+#!/usr/bin/env php
+<?php
+
+function sample($executable, $args=null, $target=null) {
+	if ($args == null) $args = [];
+	if ($target == null) $target = 1000000;
+
+	$read = 0;
+	$samples = [];
+
+	$pipes = null;
+	$cwd = getcwd();
+	$env = [ 'HOME' => getenv('HOME'), 'PATH' => getenv('PATH') ];
+	$spec = [
+		0 => ['pipe', 'r'],
+		1 => ['pipe', 'w'],
+		2 => ['file', '/dev/null', 'a']
+	];
+
+	// Create command and expected output.
+	$command = null;
+	if (is_array($executable)) {
+		$command = escapeshellcmd($executable[0]);
+		for ($i = 1; $i < count($executable); $i++) {
+			$command .= ' '.escapeshellarg($executable[$i]);
+		}
+	} else {
+		$command = escapeshellcmd($executable);
+	}
+
+	$expected = "y\n";
+	if (count($args) > 0) {
+		$expected = null;
+		foreach ($args as $arg) {
+			$command .= ' '.escapeshellarg($arg);
+			if ($expected === null) {
+				$expected = $arg;
+			} else {
+				$expected .= ' '.$arg;
+			}
+		}
+
+		$expected .= "\n";
+	}
+
+	// Create process.
+	$proc = proc_open($command, $spec, $pipes, $cwd, $env);
+	$start = microtime(false);
+	if ($proc === false || !is_resource($proc)) return false;
+	$stdout = $pipes[1];
+	fclose($pipes[0]);
+
+	// Read the first line.
+	$first = fread($stdout, strlen($expected));
+	$read = strlen($first);
+	// Read the rest. Operation will block until finish.
+	while ($read < $target) {
+		$read += strlen(fread($stdout, 8192));
+	}
+
+	// Calculate time difference.
+	$end = microtime(false);
+
+	$start = explode(" ", $start);
+	$end = explode(" ", $end);
+
+	$time_s  = intval($end[1]) - intval($start[1]);
+	$time_us = (doubleval($end[0]) * 1000000) - (doubleval($start[0]) * 1000000);
+	if ($time_us < 0) {
+		$time_s -= 1;
+		$time_us += 1000000;
+	}
+
+	// Kill the process.
+	proc_terminate($proc, 9);
+	proc_close($proc);
+
+	// Return.
+	return [
+		"read" => $read,
+		"valid" => $first === $expected,
+		"yes_expected" => $expected,
+		"yes_actual" => $first,
+		"time_s" => $time_s,
+		"time_us" => $time_us
+	];	
+}
+
+// Main
+$arg_count = null;
+$arg_samples = 1;
+$arg_json = null;
+$key = null;
+$args = null;
+$command = [];
+array_shift($argv);
+foreach ($argv as $arg) {
+	if ($args !== null) {
+		array_push($args, $arg);
+	}
+
+	switch ($key) {
+		case '--bytes':
+		case '-b':
+			$arg_count = intval($arg);
+			$key = null;
+			continue;
+
+		case '--samples':
+		case '-s':
+			$arg_samples = intval($arg);
+			$key = null;
+			continue;
+		
+		case null:
+			if ($arg === '--') {
+				$args = [];
+				continue;
+			}
+
+			if (substr($arg, 0, 1) === '-') {
+				$key = $arg;
+				switch ($arg) {
+					case '--json':
+					case '-J':
+						$arg_json = true;
+						$key = null;
+						break;
+				}
+				continue;
+			}
+
+			array_push($command, $arg);
+			continue;
+
+		default:
+			echo "yesmark: unknown argument '".$key."'\n";
+			exit(2);
+	}
+}
+
+if ($key !== null) {
+	echo "yesmark: argument '".$key."' must have a value\n";
+	exit(2);
+}
+
+// Validate.
+if (count($command) === 0) {
+	echo "yesmark: no program to execute\n";
+	exit(2);
+}
+
+if ($arg_samples < 1) {
+	echo "yesmark: sample count must be greater than 0\n";
+	exit(2);
+}
+
+// Run.
+$samples = [];
+for ($i = 0; $i < $arg_samples; $i++) {
+	fwrite(STDERR, "Running sample #".($i+1)."\n");
+	array_push($samples, sample($command, $args, $arg_count));
+}
+
+// Display.
+if ($arg_json) {
+	echo json_encode($samples)."\n";
+} else {
+	function tpad($str, $len) {
+		$n = $len - strlen($str);
+		$sb = "\033[2m";
+		while ($n > 0) {
+			$n--;
+			$sb .= "0";
+		}
+
+		return $sb."\033[0m".$str;
+	}
+
+	function tfmt($tspec) {
+		$sb = tpad($tspec[1], 2);
+		$sb .= "\033[34m s\033[0m ";
+		$sb .= tpad($tspec[2], 9);
+		$sb .= " \033[34mus\033[0m";
+		return $sb;
+	}
+
+	$min = null;
+	$max = null;
+	$avg = null;
+	for ($i = 0; $i < count($samples); $i++) {
+		$s = $samples[$i]['time_s'];
+		$us = $samples[$i]['time_us'];
+		$cs = $s + $us / 1000000;
+		if ($min === null || $cs < $min[0]) {
+			$min = [$cs, $s, $us];
+		}
+
+		if ($max === null || $cs > $max[0]) {
+			$max = [$cs, $s, $us];
+		}
+
+		if ($avg === null) {
+			$avg = $cs;
+		} else {
+			$avg += $cs;
+		}
+	}
+
+	$avg = [$avg / $arg_samples];
+	$avg[1] = floor($avg[0]);
+	$avg[2] = floor((($avg[0] * 1000000) - $avg[1]));
+
+	echo "\033[33mOutput Expected: \033[0m".json_encode($samples[0]['yes_expected'])."\n";
+	echo "\033[33mOutput Received: \033[0m".json_encode($samples[0]['yes_actual'])."\n";
+	echo "\033[33mValid:           ";
+	echo ($samples[0]['valid'] ? "\033[32mThe output is valid." : "\033[31mThe output is invalid.")."\033[0m\n";
+	echo "\033[33mMinimum Time:    \033[0m".tfmt($min)."\n";
+	echo "\033[33mMaximum Time:    \033[0m".tfmt($max)."\n";
+	echo "\033[33mAverage Time:    \033[0m".tfmt($avg)." \033[33mover \033[0m".$arg_samples."\033[33m samples.\033[0m\n"; 
+}
+
