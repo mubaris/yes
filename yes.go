@@ -6,12 +6,8 @@ import (
 )
 
 func main() {
-	var output string
-
-	switch len(os.Args) {
-	case 1:
-		output = "y"
-	default:
+	output := "y"
+	if len(os.Args) > 1 {
 		output = strings.Join(os.Args[1:], " ")
 	}
 
