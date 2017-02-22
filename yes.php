@@ -5,7 +5,8 @@ if (is_null($argv[1])) {
 		echo "y\n";
 	}
 } else {
+		$output =  implode(" ", array_slice($argv,1)) . "\n";
 	while (true) {
-		echo implode(" ", array_slice($argv,1)) . "\n";
+		echo $output;
 	}
 }
