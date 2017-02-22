@@ -97,6 +97,7 @@ array_shift($argv);
 foreach ($argv as $arg) {
 	if ($args !== null) {
 		array_push($args, $arg);
+		continue;
 	}
 
 	switch ($key) {
