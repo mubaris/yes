@@ -1,12 +1,12 @@
 <?php
-
-if (is_null($argv[1])) {
-	while (true) {
-		echo "y\n";
-	}
-} else {
-		$output =  implode(" ", array_slice($argv,1)) . "\n";
-	while (true) {
-		echo $output;
-	}
+switch ($argv[1]) {
+	case null:
+		$out = "y\n";
+	break;
+	default:
+		$out = implode(" ", array_slice($argv, 1)) . "\n";
+	break;
+}
+while (true) {
+	echo $out;
 }
