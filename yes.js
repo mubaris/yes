@@ -9,7 +9,7 @@ function flood() {
 	while (process.stdout.write(buffer) !== false);
 }
 
-const buffer = output.repeat(Math.floor(4096 / output.length));
+const buffer = output.repeat(Math.max(1, Math.floor(4096 / output.length)));
 process.stdout.on('drain', flood);
 flood();
 
