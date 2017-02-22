@@ -3,10 +3,11 @@ if (process.argv.length == 2) {
         console.log("y")
     }
 } else {
+    output = ""
+    for (i = 2; i < process.argv.length; i++) {
+        output += process.argv[i] + " "
+    }
     while (1) {
-        for (i = 2; i < process.argv.length; i++) {
-            process.stdout.write(process.argv[i] + " ")
-        }
-        console.log()
+        console.log(output)
     }
 }
