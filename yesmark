@@ -126,6 +126,20 @@ foreach ($argv as $arg) {
 						$arg_json = true;
 						$key = null;
 						break;
+
+					case '--help':
+					case '-?':
+						echo "yesmark: A script for testing the yes command.\n";
+						echo "Arguments: \n";
+						echo "  --json            Output results as JSON\n";
+						echo "  --samples [n]     The number of samples to run (default 1)\n";
+						echo "  --bytes   [n]     The number of bytes to read in each sample (default 1000)\n";
+						echo "  --        [...]   The command line arguments to pass to the command\n";
+						echo "\n";
+						echo "Example: \n";
+						echo "  ./yesmark ./yes.sh -b 100000 -s 10\n";
+						exit(0);
+						break;
 				}
 				continue;
 			}
@@ -211,6 +225,7 @@ if ($arg_json) {
 	$avg[1] = floor($avg[0]);
 	$avg[2] = floor((($avg[0] * 1000000) - $avg[1]));
 
+	fwrite(STDERR, "\n");
 	echo "\033[33mOutput Expected: \033[0m".json_encode($samples[0]['yes_expected'])."\n";
 	echo "\033[33mOutput Received: \033[0m".json_encode($samples[0]['yes_actual'])."\n";
 	echo "\033[33mValid:           ";
