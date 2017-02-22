@@ -1,6 +1,6 @@
 let args = CommandLine.arguments
-if args.count < 2 {
-    while true { print("y") }
-} else {
-    while true { print(args[1...a.count-1].joined(separator: " ")) }
+var out = "y"
+if args.count > 1 {
+    out = args[1...args.count-1].joined(separator: " ")   
 }
+while true { print(out) }
