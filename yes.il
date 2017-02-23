@@ -1,9 +1,9 @@
-.assembly Hello {}
+.assembly yes {}
 .assembly extern mscorlib {}
 .method static void Main(string[])
 {
 	.entrypoint
-	.maxstack 20
+	.maxstack 2
 	.locals init(
 		string V_0
 	)
