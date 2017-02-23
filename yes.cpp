@@ -1,18 +1,29 @@
 #include <iostream>
+#include <sstream>
 
-using namespace std;
+using std::stringstream;
+using std::string;
+using std::cout;
 
 int main(int argc, char* argv[]) {
-    if (argc == 1) {
-        while (1) {
-            cout << "y" << endl;
-        }
-    } else {
-        while (1) {
-            for (int i = 1; i < argc; i++) {
-                cout << argv[i] << " ";
-            }
-            cout << endl;
-        }
-    }
+	stringstream builder;
+	string output;
+	
+	// Build string.
+	if (argc > 1) {
+		builder << argv[1];
+		for (int i = 2; i < argc; i++) {
+			builder << " " << argv[i];
+		}
+		builder << "\n";
+	} else {
+		builder << "y\n";
+	}
+
+	// Output string.
+	output = builder.str();
+	while (true) {
+		cout << output;
+	}
 }
+
