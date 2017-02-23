@@ -1,29 +1,15 @@
 #include <iostream>
-#include <sstream>
-
-using std::stringstream;
-using std::string;
-using std::cout;
+#include <vector>
 
 int main(int argc, char* argv[]) {
-	stringstream builder;
-	string output;
-	
-	// Build string.
-	if (argc > 1) {
-		builder << argv[1];
-		for (int i = 2; i < argc; i++) {
-			builder << " " << argv[i];
-		}
-		builder << "\n";
-	} else {
-		builder << "y\n";
-	}
+    std::string output;
+    std::vector<std::string> args(argv+1, argv + argc);
 
-	// Output string.
-	output = builder.str();
-	while (true) {
-		cout << output;
-	}
+    if (argc <= 1)
+        output = "y";
+    else
+        for (const auto& str : args) output += str + " ";
+
+    while(1)
+        std::cout << output << "\n";
 }
-
