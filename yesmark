@@ -20,12 +20,12 @@ function sample($executable, $args=null, $target=null) {
 	// Create command and expected output.
 	$command = null;
 	if (is_array($executable)) {
-		$command = escapeshellcmd($executable[0]);
+		$command = 'exec '.escapeshellcmd($executable[0]);
 		for ($i = 1; $i < count($executable); $i++) {
 			$command .= ' '.escapeshellarg($executable[$i]);
 		}
 	} else {
-		$command = escapeshellcmd($executable);
+		$command = 'exec '.escapeshellcmd($executable);
 	}
 
 	$expected = "y\n";
