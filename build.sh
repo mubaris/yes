@@ -198,6 +198,40 @@ BUILD-START "Awk" "yes.awk"
 BUILD-END
 
 # -------------------------------------
+# Brainfuck
+BUILD-START "Brainfuck" "yes.bf"
+	case "$(BUILD-FIND brainfuck)" in
+		brainfuck)
+			if INTERPRETED-COPY; then
+				BUILT true
+			else
+				INTERPRETED-WRAP brainfuck "${OBJ}/${SRC_FILENAME}" > "${OUT_FILE}"
+				chmod +x "${OUT_FILE}"
+				cp "${SRC_FILE}" "${OBJ}/${SRC_FILENAME}"
+				BUILT TRUE
+			fi
+			;;
+	esac
+BUILD-END
+
+# -------------------------------------
+# Brainfuck (Custom)
+BUILD-START "Brainfuck (Args)" "yes.custom.bf"
+	case "$(BUILD-FIND brainfuck)" in
+		brainfuck)
+			if INTERPRETED-COPY; then
+				BUILT true
+			else
+				INTERPRETED-WRAP brainfuck "${OBJ}/${SRC_FILENAME}" > "${OUT_FILE}"
+				chmod +x "${OUT_FILE}"
+				cp "${SRC_FILE}" "${OBJ}/${SRC_FILENAME}"
+				BUILT TRUE
+			fi
+			;;
+	esac
+BUILD-END
+
+# -------------------------------------
 # C
 BUILD-START "C" "yes.c"
 	case "$(BUILD-FIND clang gcc)" in
