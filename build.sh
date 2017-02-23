@@ -284,7 +284,24 @@ BUILD-START "Erlang" "yes.escript"
 BUILD-END
 
 # -------------------------------------
-# JavaScript
+# Fish
+BUILD-START "Fish" "yes.fish"
+	case "$(BUILD-FIND fish)" in
+		fish)
+			if INTERPRETED-COPY; then
+				BUILT true
+			else
+				INTERPRETED-WRAP fish "${OBJ}/${SRC_FILENAME}" '{$@}' > "${OUT_FILE}"
+				cp "${SRC_FILE}" "${OBJ}/${SRC_FILENAME}"
+				chmod +x "${OUT_FILE}"
+				BUILT TRUE
+			fi
+			;;
+	esac
+BUILD-END
+
+# -------------------------------------
+# Go
 BUILD-START "Go" "yes.go"
 	case "$(BUILD-FIND go)" in
 		go)
