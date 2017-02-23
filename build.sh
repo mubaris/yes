@@ -307,6 +307,18 @@ BUILD-START "Haskell" "yes.hs"
 BUILD-END
 
 # -------------------------------------
+# IL
+BUILD-START "IL" "yes.il"
+	case "$(BUILD-FIND ilasm)" in
+		ilasm)
+			BUILD-RUN ilasm /out:"${OBJ}/${OUT_FILENAME}.exe" "${SRC_FILE}"
+			INTERPRETED-WRAP mono "${OBJ}/${OUT_FILENAME}.exe" '{$@}' > "${OUT_FILE}"
+			chmod +x "${OUT_FILE}"
+			;;
+	esac
+BUILD-END
+
+# -------------------------------------
 # Java
 BUILD-START "Java" "yes.java"
 	case "$(BUILD-FIND javac)" in
