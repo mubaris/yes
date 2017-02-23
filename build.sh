@@ -181,14 +181,14 @@ BUILD-START "AppleScript" "yes.applescript"
 BUILD-END
 
 # -------------------------------------
-# AWK
+# Awk
 BUILD-START "Awk" "yes.awk"
 	case "$(BUILD-FIND awk)" in
 		awk)
 			if INTERPRETED-COPY; then
 				BUILT true
 			else
-				INTERPRETED-WRAP awk "${OBJ}/${SRC_FILENAME}" '{$@}' > "${OUT_FILE}"
+				INTERPRETED-WRAP awk "${OBJ}/${SRC_FILENAME}" -- '{$@}' > "${OUT_FILE}"
 				chmod +x "${OUT_FILE}"
 				cp "${SRC_FILE}" "${OBJ}/${SRC_FILENAME}"
 				BUILT TRUE
@@ -229,9 +229,9 @@ BUILD-END
 # C#
 BUILD-START "C#" "yes.cs"
 	case "$(BUILD-FIND mcs)" in
-		clang)
-			BUILD-RUN mcs -o --out:"${OBJ}/${OUT_FILENAME}.exe" "${SRC_FILE}"
-			INTERPRETED_WRAP mono "${OBJ}/${OUT_FILENAME}.exe" '{$@}' > "${OUT_FILE}"
+		mcs)
+			BUILD-RUN mcs -optimize+ -out:"${OBJ}/${OUT_FILENAME}.exe" "${SRC_FILE}"
+			INTERPRETED-WRAP mono "${OBJ}/${OUT_FILENAME}.exe" '{$@}' > "${OUT_FILE}"
 			chmod +x "${OUT_FILE}"
 			;;
 	esac
