@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
 			strcat(output, argv[i]);
 		}
 		strcat(output, "\n");
+		output_len = strlen(output);
 	} else {
 		output = "y\n";
 		output_len = 2;
@@ -36,7 +37,7 @@ int main(int argc, char* argv[]) {
 
 	// Flood.
 	while (1) {
-		fputs(output, stdout);
+		fwrite(output, 1, output_len, stdout);
 	}	
 }
 
