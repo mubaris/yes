@@ -81,3 +81,14 @@ OR
 $ ./yes argument list
 ```
 
+## R
+
+```shell
+$ yes() 
+```
+
+OR
+
+```shell
+$ yes(string argument)
+```
