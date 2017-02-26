@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 if #arg == 0 then
     while true do
         print("y")
