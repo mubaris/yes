@@ -1,3 +1,5 @@
+#!/usr/bin/osascript
+
 on run args
 	if count of args is greater than 0
 		set applescript's text item delimiters to " "
