@@ -18,7 +18,7 @@ $ ./yes argument list
 ## C++
 
 ```shell
-$ g++ -o yes yes.cpp
+$ g++ -o yes --std=c++11 yes.cpp
 $ ./yes
 ```
 
