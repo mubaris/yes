@@ -1,3 +1,5 @@
+#!/usr/bin/env rust
+
 use std::env;
 
 fn main() {
