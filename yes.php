@@ -1,3 +1,5 @@
+#!/usr/bin/env php
+
 <?php
 $out = "y\n";
 if (!is_null($argv[1])) {

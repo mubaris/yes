@@ -1,3 +1,5 @@
+#!/usr/bin/env swift
+
 let args = CommandLine.arguments
 var out = "y"
 if args.count > 1 {
