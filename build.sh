@@ -510,4 +510,16 @@ BUILD-START "Vala" "yes.vala"
 	esac
 BUILD-END
 
+# -------------------------------------
+# VB
+BUILD-START "VB" "yes.vb"
+	case "$(BUILD-FIND vbnc)" in
+		vbnc)
+			BUILD-RUN vbnc -optimize+ -out:"${OBJ}/${OUT_FILENAME}.exe" "${SRC_FILE}"
+			INTERPRETED-WRAP mono "${OBJ}/${OUT_FILENAME}.exe" '{$@}' > "${OUT_FILE}"
+			chmod +x "${OUT_FILE}"
+			;;
+	esac
+BUILD-END
+
 
