@@ -3,6 +3,7 @@
 ## About yes
 
 The `yes` command is used to output __y__, or whatever word you choose, forever. :repeat:
+![yes](https://media.giphy.com/media/L9kwXOK00OJGM/giphy.gif)
 
 ## Description
 
