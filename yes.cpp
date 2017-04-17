@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cstdio>
 #include <vector>
 
 int main(int argc, char* argv[]) {
@@ -10,6 +10,8 @@ int main(int argc, char* argv[]) {
     else
         for (const auto& str : args) output += str + " ";
 
-    while (1)
-        std::cout << output << "\n";
+    //while(1) - sometimes it checks if 1==1
+    for(;;)
+        //std::cout << output << "\n";
+        printf("%s\n",output); //printf is faster
 }

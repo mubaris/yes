@@ -36,8 +36,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Flood.
-	while (1) {
+	for(;;)
 		fwrite(output, 1, output_len, stdout);
-	}	
 }
 
