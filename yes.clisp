@@ -1,0 +1,2 @@
+(defun yes (&optional (str "y"))
+  (loop (format t "~a" str) (terpri)))
