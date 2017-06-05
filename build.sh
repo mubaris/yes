@@ -348,6 +348,23 @@ BUILD-START "Java" "yes.java"
 BUILD-END
 
 # -------------------------------------
+# Groovy
+BUILD-START "Groovy" "yes.groovy"
+	case "$(BUILD-FIND groovy)" in
+		groovy)
+			if INTERPRETED-COPY; then
+				BUILT true
+			else
+				INTERPRETED-WRAP groovy "${OBJ}/${SRC_FILENAME}" '{$@}' > "${OUT_FILE}"
+				cp "${SRC_FILE}" "${OBJ}/${SRC_FILENAME}"
+				chmod +x "${OUT_FILE}"
+				BUILT TRUE
+			fi
+			;;
+	esac
+BUILD-END
+
+# -------------------------------------
 # JavaScript
 BUILD-START "JavaScript" "yes.js"
 	case "$(BUILD-FIND node)" in

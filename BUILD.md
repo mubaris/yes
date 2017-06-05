@@ -43,6 +43,18 @@ OR
 $ java yes argument list
 ```
 
+## Groovy
+
+```shell
+$ ./yes.groovy
+```
+
+OR
+
+```
+$ ./yes.groovy argument list
+```
+
 ## Node.js
 
 ```shell
