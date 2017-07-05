@@ -104,3 +104,15 @@ OR
 ```shell
 $ yes(string argument)
 ```
+
+## Pure Data
+
+```shell
+$ pd -batch -open yes.pd
+```
+
+OR
+
+```shell
+$ pd -batch -open yes.pd -send "_ argument list"
+```
