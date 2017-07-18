@@ -104,3 +104,18 @@ OR
 ```shell
 $ yes(string argument)
 ```
+
+## OCaml
+
+```shell
+$ ocamlopt -o yes yes.ml
+$./yes
+```
+
+OR
+
+```shell
+$ ./yes argument list
+```
+
+
