@@ -1,0 +1,14 @@
+#N canvas 657 423 450 300 10;
+#X obj 187 85 receive _;
+#X obj 106 123 list prepend y;
+#X obj 106 145 list trim;
+#X obj 106 47 loadbang;
+#X obj 106 89 until;
+#X obj 106 69 delay 0;
+#X obj 106 169 stdout -cr;
+#X connect 0 0 1 1;
+#X connect 1 0 2 0;
+#X connect 2 0 6 0;
+#X connect 3 0 5 0;
+#X connect 4 0 1 0;
+#X connect 5 0 4 0;
