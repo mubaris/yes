@@ -1,5 +1,5 @@
-class yes {
-    public static void main (String[] args) {
+class Yes {
+    public static void main(String[] args) {
         String output = "y";
 
         if (args.length > 0) {
