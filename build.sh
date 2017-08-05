@@ -538,5 +538,15 @@ BUILD-START "VB" "yes.vb"
 			;;
 	esac
 BUILD-END
+# -------------------------------------
+# OCaml
+BUILD-START "OCaml" "yes.ml"
+	case "$(BUILD-FIND ocaml)" in
+		ocaml)
+			BUILD-RUN ocamlopt -o "${OUT_FILE}" "${SRC_FILE}"
+			;;
+	esac
+BUILD-END
+
 
 
