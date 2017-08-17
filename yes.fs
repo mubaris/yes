@@ -20,9 +20,8 @@ let yes() =
   while true do
    printfn "y"
  
- let words = input.Split ' '
- 
- let firstcheck = words.[1].Replace("\'","")
+ let words = input.Replace("yes ","")
+ let firstcheck = words.Replace("\'","")
  let secondcheck = firstcheck.Replace("\"","")
 
  while true do
