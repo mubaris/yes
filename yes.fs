@@ -16,15 +16,16 @@ open System
 let yes() =
  let input = Console.ReadLine()
 
- if input = "yes" then
+ if input = "yes" || input = "yes " then
   while true do
    printfn "y"
  
- let words = input.Replace("yes ","")
- let firstcheck = words.Replace("\'","")
- let secondcheck = firstcheck.Replace("\"","")
+ let words = input.Substring 4
+ let words = words.Replace("\'","")
+ let words = words.Replace("\"","")
 
  while true do
-  printfn "%s" secondcheck
+  printfn "%s" words
 
 yes()
+
