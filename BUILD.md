@@ -96,7 +96,7 @@ $ ./yes argument list
 ## R
 
 ```shell
-$ yes() 
+$ yes()
 ```
 
 OR
@@ -128,4 +128,16 @@ OR
 
 ```shell
 $ pd -batch -open yes.pd -send "_ argument list"
+```
+
+## Clojure
+
+```shell
+$ clojure yes.clj
+```
+
+OR
+
+```shell
+$ clojure yes.clj arguments
 ```
