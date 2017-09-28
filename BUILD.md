@@ -141,3 +141,9 @@ OR
 ```shell
 $ clojure yes.clj arguments
 ```
+
+## Nim
+
+```shell
+$ nim -d:release compile --run yes.nim argument list
+```
