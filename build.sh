@@ -47,6 +47,7 @@ BUILD-FIND() {
 
 BUILD-START() {
 	BUILD_LASTERROR=""
+	BUILD_LASTEXIT=""
 	BUILD_EXECUTED=false
 	SRC_FILENAME="$2"
 	OUT_FILENAME="$(sed 's/\./-/' <<< "$(basename "$2")")"
