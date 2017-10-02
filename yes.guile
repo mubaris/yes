@@ -1,0 +1,9 @@
+#! /usr/local/bin/guile -s
+!#
+
+(define (yes arg)
+  (do () (#f) (begin (display arg) (newline))))
+
+(yes (if (> (length (command-line)) 1)
+  (string-join (cdr (command-line)) " ")
+  "y"))
