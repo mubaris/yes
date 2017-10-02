@@ -1,11 +1,6 @@
 fun main(args: Array<String>) {
-    var output = "y"
+    val output = if (args.isNotEmpty()) args.joinToString(" ") else "y"
 
-    if (args.size > 0) {
-        output = args.joinToString(separator = " ")
-    }
-
-    while (true) {
+    while (true)
         println(output)
-    }
 }
