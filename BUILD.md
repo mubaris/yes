@@ -141,3 +141,14 @@ OR
 ```shell
 $ clojure yes.clj arguments
 ```
+
+## Guile
+```shell
+$ guile - s yes.guile
+```
+
+OR
+
+```shell
+$ guile -s yes.guile arguments
+```
