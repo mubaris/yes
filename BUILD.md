@@ -144,11 +144,11 @@ $ clojure yes.clj arguments
 
 ## Guile
 ```shell
-$ guile - s yes.guile
+$ ./yes.guile
 ```
 
 OR
 
 ```shell
-$ guile -s yes.guile arguments
+$ ./yes.guile arguments
 ```
