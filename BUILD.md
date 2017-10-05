@@ -142,8 +142,4 @@ OR
 $ clojure yes.clj arguments
 ```
 
-## Elixir
-```shell
-$ iex Yes.exs
-iex(1)> Yes.run "param"
-```
+
