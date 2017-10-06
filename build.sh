@@ -538,6 +538,7 @@ BUILD-START "VB" "yes.vb"
 			;;
 	esac
 BUILD-END
+
 # -------------------------------------
 # OCaml
 BUILD-START "OCaml" "yes.ml"
@@ -548,5 +549,19 @@ BUILD-START "OCaml" "yes.ml"
 	esac
 BUILD-END
 
-
-
+# -------------------------------------
+# Guile
+BUILD-START "Guile" "yes.guile"
+	case "$(BUILD-FIND guile)" in
+		guile)
+			if INTERPRETED-COPY; then
+				BUILT true
+			else
+				INTERPRETED-WRAP sh "${OBJ}/${SRC_FILENAME}" '{$@}' > "${OUT_FILE}"
+				cp "${SRC_FILE}" "${OBJ}/${SRC_FILENAME}"
+				chmod +x "${OUT_FILE}"
+				BUILT TRUE
+			fi
+			;;
+	esac
+BUILD-END
