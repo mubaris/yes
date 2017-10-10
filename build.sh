@@ -321,7 +321,11 @@ BUILD-END
 # -------------------------------------
 # Haskell
 BUILD-START "Haskell" "yes.hs"
-	BUILD-FAIL "TODO BUILD SCRIPT"
+	case "$(BUILD-FIND ghc)" in
+		ghc)
+			BUILD-RUN ghc "-outputdir ${OBJ} -dynamic -o ${OUT_FILE} ${SRC_FILE}"
+			;;
+	esac
 BUILD-END
 
 # -------------------------------------
