@@ -3,10 +3,9 @@ class Yes
 	static void Main(string[] argv)
 	{
 		string st = "y";
-		else
+		if(argv.Length > 0)
 		{
 			st = string.Join(" ", argv);
-			
 		}
 		while (true)
 		{
