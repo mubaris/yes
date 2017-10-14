@@ -1,0 +1,12 @@
+#!/usr/bin/awful
+
+!if :lt i0 :param-cnt
+	:set &string :param-str i0
+!else
+	:set &string s'y'
+!fi
+
+!while i1
+	:writeln $string
+!done
+
