@@ -142,4 +142,14 @@ OR
 $ clojure yes.clj arguments
 ```
 
+## FORTRAN (f90)
+```shell
+$ gfortran -o yes yes.f90
+$ ./yes
+```
 
+OR
+
+```shell
+./yes argument list
+```
