@@ -2,12 +2,23 @@
 ! compiled using the GNU gfortran compiler, version 6.3
 ! if given string to repeat, max length is 32
 
-program yes
+PROGRAM yes
+
+    ! ignore ancient fortran variable name rules
     IMPLICIT none
+
+    ! local variables
     CHARACTER (len=32) :: arg
+    LOGICAL :: t
+    t=.true.
+
+    ! check if non-standard input given
     CALL get_command_argument(1, arg)
     IF (LEN_TRIM(arg) == 0) arg="y"
-    identifier: DO WHILE (0.LE.1) 
+
+    ! print until interrupted
+    l: DO WHILE (t) 
       PRINT*, arg
-    END DO identifier
-end program yes
+    END DO l
+
+END PROGRAM yes

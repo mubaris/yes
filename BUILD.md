@@ -142,7 +142,7 @@ OR
 $ clojure yes.clj arguments
 ```
 
-## FORTRAN (f90)
+## Fortran (90)
 ```shell
 $ gfortran -o yes yes.f90
 $ ./yes
@@ -151,5 +151,19 @@ $ ./yes
 OR
 
 ```shell
-./yes argument list
+./yes argument
+```
+
+
+## MIPS Assembly Language
+With the MARS simulator set up:
+
+```shell
+$ java -jar Mars.jar sm yes.s
+```
+
+OR
+
+```shell
+.$ java -jar Mars.jar sm yes.s pa argument
 ```
