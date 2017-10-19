@@ -18,17 +18,16 @@ y:  .asciiz "y"
     # $a0 = argc, $a1 = argv.
 
 main:
-    add $s0, $zero, $a0            # Store argc in saved register
-    bne $s0, $zero, main_else      # If given command-line args, goto main_else    
-    la $s1, y                      # Else, we want to print "y" --- recall syscall might not preserve temporary registers, so best to use $s1 for the address 
+    bne $a0, $zero, main_else      # If given command-line args, goto main_else    
+    la $s0, y                      # Else, we want to print "y" --- recall syscall might not preserve temporary registers, so best to use $s0 for the address 
     j main_loop                    # goto main_loop
 
 main_else:
-    lw $s1, 0($a1)                 # Point $s1 at argv[0] ---- Note in MIPS/MARS this is not the file name itself
+    lw $s0, 0($a1)                 # Point $s0 at argv[0] ---- Note in MIPS/MARS this is not the file name itself
     j main_loop                    # goto main_loop    
 
 main_loop:
-    add $a0, $s1, $zero            # Load address into syscall arg
+    add $a0, $s0, $zero            # Load address into syscall arg
     li $v0, 4                      # Syscall op for print string
     syscall                        # Call the OS
 
