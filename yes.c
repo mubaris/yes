@@ -2,6 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+///////////////////////////////////
+// How to build and execute
+//
+// Build:
+// gcc -o yes yes.c
+//
+// option 1 - output 'yes'
+// ./yes
+//
+// option 2 - output argument list
+// ./yes argument_list
+
+
 #define max(a,b) \
 	({ __typeof__ (a) _a = (a); \
 	 __typeof__ (b) _b = (b); \

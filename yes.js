@@ -1,3 +1,12 @@
+///////////////////////////////////
+// How to execute
+//
+// option 1 - output 'yes'
+// node yes.js
+//
+// option 2 - output argument list
+// node yes.js argument_list
+
 // Get output string.
 let output = "y\n";
 if (process.argv.length !== 2) {
