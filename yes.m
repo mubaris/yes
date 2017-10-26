@@ -1,4 +1,15 @@
 #import <Foundation/Foundation.h>
+///////////////////////////////////
+// How to build and execute
+//
+// Build:
+// clang -framework Foundation -o yes yes.m
+//
+// option 1 - output 'yes'
+// ./yes
+//
+// option 2 - output argument list
+// ./yes argument_list
 
 int main() {
 	NSArray* args = [[NSProcessInfo processInfo] arguments];
