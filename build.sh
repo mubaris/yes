@@ -457,8 +457,8 @@ BUILD-END
 # -------------------------------------
 # Python
 BUILD-START "Python" "yes.py"
-	case "$(BUILD-FIND php)" in
-		php)
+	case "$(BUILD-FIND python)" in
+		python)
 			if INTERPRETED-COPY; then
 				BUILT true
 			else
