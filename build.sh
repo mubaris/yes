@@ -491,7 +491,11 @@ BUILD-END
 # -------------------------------------
 # Rust
 BUILD-START "Rust" "yes.rs"
-	BUILD-FAIL "TODO BUILD SCRIPT"
+	case "$(BUILD-FIND rustc)" in
+		rustc)
+			BUILD-RUN rustc -o "${OUT_FILE}" "${SRC_FILE}"
+			;;
+	esac
 BUILD-END
 
 # -------------------------------------
