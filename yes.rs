@@ -1,4 +1,4 @@
-#!/usr/bin/env rust
+#!/usr/bin/env rustc
 
 use std::env;
 
