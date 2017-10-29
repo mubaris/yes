@@ -409,6 +409,18 @@ BUILD-START "Objective-C" "yes.m"
 BUILD-END
 
 # -------------------------------------
+# OCaml
+BUILD-START "OCaml" "yes.ml"
+	case "$(BUILD-FIND ocaml)" in
+		ocaml)
+			BASE_FILENAME="${SRC_FILENAME%%.*}"
+			BUILD-RUN ocamlopt -o "${OUT_FILE}" "${SRC_FILE}"
+			mv ${BASE_FILENAME}.cmi ${BASE_FILENAME}.cmx ${BASE_FILENAME}.o ${OBJ}
+			;;
+	esac
+BUILD-END
+
+# -------------------------------------
 # PHP
 BUILD-START "PHP" "yes.php"
 	case "$(BUILD-FIND php)" in
@@ -540,16 +552,6 @@ BUILD-START "VB" "yes.vb"
 			BUILD-RUN vbnc -optimize+ -out:"${OBJ}/${OUT_FILENAME}.exe" "${SRC_FILE}"
 			INTERPRETED-WRAP mono "${OBJ}/${OUT_FILENAME}.exe" '{$@}' > "${OUT_FILE}"
 			chmod +x "${OUT_FILE}"
-			;;
-	esac
-BUILD-END
-
-# -------------------------------------
-# OCaml
-BUILD-START "OCaml" "yes.ml"
-	case "$(BUILD-FIND ocaml)" in
-		ocaml)
-			BUILD-RUN ocamlopt -o "${OUT_FILE}" "${SRC_FILE}"
 			;;
 	esac
 BUILD-END
