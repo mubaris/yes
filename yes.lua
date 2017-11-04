@@ -1,14 +1,11 @@
 #!/usr/bin/env lua
 
 if #arg == 0 then
-    while true do
-        print("y")
-    end
+  line = "y"
 else
-    while true do
-        for i = 1, #arg do
-            io.write(arg[i], " ")
-        end
-        print()
-    end
+  line = table.concat(arg, " ")
+end
+
+while true do
+  print(line)
 end
