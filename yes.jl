@@ -2,7 +2,7 @@
 
 while true
 	if length(ARGS) == 0
-		println("yes")
+		println("y")
 	else
 		println(ARGS[1])
 	end
