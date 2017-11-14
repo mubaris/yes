@@ -1,9 +1,5 @@
 fun main(args: Array<String>) {
-    var output = "y"
-
-    if (args.size > 0) {
-        output = args.joinToString(separator = " ")
-    }
+    val output = if (args.isNotEmpty()) args.joinToString(" ") else "y"
 
     while (true) {
         println(output)
