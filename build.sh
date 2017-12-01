@@ -275,7 +275,12 @@ BUILD-END
 # -------------------------------------
 # D
 BUILD-START "D" "yes.d"
-	BUILD-FAIL "TODO BUILD SCRIPT"
+	case "$(BUILD-FIND rdmd)" in
+		rdmd)
+			rdmd --build-only -of"${BIN}/yes-d" yes.d
+			BUILT true
+			;;
+	esac
 BUILD-END
 
 # -------------------------------------
