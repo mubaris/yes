@@ -404,6 +404,17 @@ BUILD-START "Lua" "yes.lua"
 BUILD-END
 
 # -------------------------------------
+# Nasm (macOS)
+BUILD-START "Nasm (macOS)" "yes.64.osx.nasm"
+case "$(BUILD-FIND nasm)" in
+	nasm)
+		BUILD-RUN nasm -f macho64 -o "${OBJ}/${SRC_FILENAME}.o" "${SRC_FILE}"
+		BUILD-RUN ld -lSystem -macosx_version_min 10.8 "${OBJ}/${SRC_FILENAME}.o" -o "${OUT_FILE}"
+		;;
+esac
+BUILD-END
+
+# -------------------------------------
 # Objective-C
 BUILD-START "Objective-C" "yes.m"
 	case "$(BUILD-FIND clang)" in
