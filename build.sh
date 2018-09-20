@@ -351,7 +351,7 @@ BUILD-START "Java" "yes.java"
 	case "$(BUILD-FIND javac)" in
 		javac)
 			BUILD-RUN javac -d "${OBJ}" "${SRC_FILE}"
-			INTERPRETED-WRAP java -cp "${OBJ}" "yes" '{$@}' > "${OUT_FILE}"
+			INTERPRETED-WRAP java -cp "${OBJ}" "Yes" '{$@}' > "${OUT_FILE}"
 			chmod +x "${OUT_FILE}"
 			;;
 	esac
