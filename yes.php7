@@ -1,0 +1,3 @@
+#!/usr/bin/env php
+<?php
+while (true) echo ($argv[1] ?? "y")."\n";
