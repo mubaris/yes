@@ -400,9 +400,32 @@ BUILD-END
 # -------------------------------------
 # Lua
 BUILD-START "Lua" "yes.lua"
-	BUILD-FAIL "TODO BUILD SCRIPT"
+  for prog in "luac" "lua"
+  do
+    case "$(BUILD-FIND $prog)" in
+      luac)
+        if ! INTERPRETED-COPY; then
+          BUILD-RUN luac -o "${OUT_FILE}" "${SRC_FILE}"
+          chmod +x "${OUT_FILE}"
+          BUILT TRUE
+          break;
+        fi
+      ;;
+      lua)
+        if INTERPRETED-COPY; then
+          BUILT TRUE
+          break;
+        else
+          INTERPRETED-WRAP lua "${OBJ}/${SRC_FILENAME}" '{$@}' > "${OUT_FILE}"
+          cp "${SRC_FILE}" "${OBJ}/${SRC_FILENAME}"
+          chmod +x "${OUT_FILE}"
+          BUILT TRUE
+          break;
+        fi
+      ;;
+    esac
+  done
 BUILD-END
-
 # -------------------------------------
 # Objective-C
 BUILD-START "Objective-C" "yes.m"
