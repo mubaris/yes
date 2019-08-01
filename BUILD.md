@@ -28,6 +28,18 @@ OR
 $ ./yes argument list
 ```
 
+## Emacs Lisp
+
+```shell
+$ emacs --batch -l /path/to/yes.el -f yes -kill
+```
+
+OR
+
+```shell
+$ emacs --batch -l ~/cde/elisp/yes-2.el --eval='(yes "string")' -kill
+```
+
 ## Java
 
 Version - Java 8
