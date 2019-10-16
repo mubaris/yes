@@ -1,5 +1,5 @@
 void main(List<String> arguments) {
-  val output = "";
+  var output = "";
   
   if (arguments.length > 0) {
     for (var args in arguments)
