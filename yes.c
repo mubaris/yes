@@ -50,6 +50,6 @@ int main(int argc, char* argv[]) {
 
 	// Flood.
 	for(;;)
-		fwrite(output, 1, output_len, stdout);
+		fwrite(output, sizeof(char), output_len, stdout);
 }
 
