@@ -46,13 +46,13 @@ BUILD-FIND() {
 }
 
 BUILD-START() {
-        local basename
+	local basename
 	BUILD_LASTERROR=""
 	BUILD_LASTEXIT=""
 	BUILD_EXECUTED=false
 	SRC_FILENAME="$2"
-        basename="$(basename "$2")"
-        OUT_FILENAME="${basename//\./-}"
+	basename="$(basename "$2")"
+	OUT_FILENAME="${basename//\./-}"
 	SRC_FILE="${SRC}/${SRC_FILENAME}"
 	OUT_FILE="${BIN}/${OUT_FILENAME}"
 	printf "\033[33mBuilding \033[0m%-16s\033[3m... " "$1"
