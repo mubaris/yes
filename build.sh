@@ -4,7 +4,7 @@
 INSTALLED() {
 	local loc;
 	loc="$(which "$1" 2>&1)"
-	if [ $? -eq 0 ] && [ -n "$loc" ]; then
+	if [ "$loc" ] && [ -n "$loc" ]; then
 		return 0
 	fi
 
@@ -46,11 +46,13 @@ BUILD-FIND() {
 }
 
 BUILD-START() {
+        local basename
 	BUILD_LASTERROR=""
 	BUILD_LASTEXIT=""
 	BUILD_EXECUTED=false
 	SRC_FILENAME="$2"
-	OUT_FILENAME="$(sed 's/\./-/' <<< "$(basename "$2")")"
+        basename="$(basename "$2")"
+        OUT_FILENAME="${basename//\./-}"
 	SRC_FILE="${SRC}/${SRC_FILENAME}"
 	OUT_FILE="${BIN}/${OUT_FILENAME}"
 	printf "\033[33mBuilding \033[0m%-16s\033[3m... " "$1"
@@ -68,12 +70,12 @@ BUILD-RUN() {
 	done
 
 	BUILD_EXECUTED=true
-	BUILD_LASTERROR="$($@ 2>&1)"
+	BUILD_LASTERROR="$("$@" 2>&1)"
 	BUILD_LASTEXIT=$?
 
 	printf "\033[2K\033[A\033[G\033[29C"
 
-	return $ret
+	return
 }
 
 BUILD-END() {
@@ -137,7 +139,7 @@ INTERPRETED-WRAP() {
 			esac
 		fi
 	done
-	printf "\nexit $?\n"
+	printf "\nexit %s\n" $?
 }
 
 # -------------------------------------
@@ -420,7 +422,7 @@ BUILD-START "OCaml" "yes.ml"
 		ocaml)
 			BASE_FILENAME="${SRC_FILENAME%%.*}"
 			BUILD-RUN ocamlopt -o "${OUT_FILE}" "${SRC_FILE}"
-			mv ${BASE_FILENAME}.cmi ${BASE_FILENAME}.cmx ${BASE_FILENAME}.o ${OBJ}
+			mv "${BASE_FILENAME}".cmi "${BASE_FILENAME}".cmx "${BASE_FILENAME}".o "${OBJ}"
 			;;
 	esac
 BUILD-END

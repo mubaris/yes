@@ -20,7 +20,7 @@ func main() {
 
 	// Create buffer
 	buf := make([]byte, bufsize)
-	// Popoulate buffer
+	// Populate buffer
 	for i := 0; i < len(buf)-yLen; i += yLen {
 		for s := 0; s < len(y); s++ {
 			buf[i+s] = y[s]
