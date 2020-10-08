@@ -1,5 +1,5 @@
-#! /usr/bin/env zsh
+#!/usr/bin/env zsh
 
-local it="${*:-y}"
-while {true} {print $it}
-
+readonly s="${*:-y}"
+while :
+    print "$s"

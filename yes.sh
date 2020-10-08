@@ -1,8 +1,7 @@
 #!/bin/sh
 
-OUT=$* && [ -z "$OUT" ] && OUT="y"
-
+readonly s="${*:-y}"
 while :
 do
-    echo "$OUT"
+    echo "$s"
 done
