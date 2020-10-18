@@ -15,12 +15,11 @@
 
 import sys
 
+DEFAULT_OUTPUT = "y"
+
 try:
-	if len(sys.argv) == 1:
-	    while True:
-	        print("y")
-	output = " ".join(sys.argv[1:])
+	output = " ".join(sys.argv[1:]) or DEFAULT_OUTPUT
 	while True:
-	    print(output)
+		print(output)
 except KeyboardInterrupt:
 	pass
