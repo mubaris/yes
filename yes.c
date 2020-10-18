@@ -14,27 +14,23 @@
 // option 2 - output argument list
 // ./yes argument_list
 
-
-#define max(a,b) \
-	({ __typeof__ (a) _a = (a); \
-	 __typeof__ (b) _b = (b); \
-	 _a > _b ? _a : _b; });
-
-
 int main(int argc, char* argv[]) {
 	char* output;
 	int output_size;
 	int output_len;
 
 	if (argc > 1) {
-		// Create buffer.
-		int needed_size = 2 + strlen(argv[1]);
-		for (int i = 2; i < argc; i++) {
-			needed_size += 1 + strlen(argv[i]);
+		// Calculate output buffer size.
+		output_len = 0;
+		for (int i = 1; i < argc; i++) {
+			output_len += strlen(argv[i]);
 		}
+		output_len += argc - 2; // Spaces between arguments.
+		output_len++; // Newline.
 
-		output = (char*) malloc(needed_size);
-		
+		// Allocate output buffer.
+		output = (char*) malloc(output_len + 1); // Plus one for the null terminator.
+
 		// Append to buffer.
 		strcat(output, argv[1]);
 		for (int i = 2; i < argc; i++) {
@@ -42,7 +38,6 @@ int main(int argc, char* argv[]) {
 			strcat(output, argv[i]);
 		}
 		strcat(output, "\n");
-		output_len = strlen(output);
 	} else {
 		output = "y\n";
 		output_len = 2;
