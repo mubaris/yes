@@ -1,14 +1,34 @@
-import os, strutils, sequtils
+# yes nim
 
-proc yes() =
-  var args : string
+#[
+   How to build and execute
+  
+   Build:
+   nim compile yes.nim
+  
+   option 1 - output 'yes'
+   ./yes
+  
+   option 2 - output argument list
+   ./yes argument_list
+]#
 
-  if paramCount() == 0:
-    args = "y"
+
+import os
+import strutils
+
+
+proc yes(): void =
+  var yes = ""
+  if paramCount() > 0:
+    yes = commandLineParams().join(" ")
+    echo(yes)
   else:
-    args = commandLineParams().mapIt(string, $it).join(" ")
-
+    yes = "yes"
   while true:
-    echo args
+    echo(yes)
 
-yes()
+
+when isMainModule:
+  yes()
+

@@ -167,3 +167,17 @@ OR
 ```shell
 .$ java -jar Mars.jar sm yes.s pa argument
 ```
+
+
+## Nim
+
+```shell
+$ nim compile yes.nim
+$./yes
+```
+
+OR
+
+```shell
+$ ./yes argument list
+```
