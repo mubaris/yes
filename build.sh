@@ -581,3 +581,13 @@ BUILD-START "Guile" "yes.guile"
 			;;
 	esac
 BUILD-END
+
+# -------------------------------------
+# Nim
+BUILD-START "Nim" "yes.nim"
+	case "$(BUILD-FIND nim)" in
+		nim)
+			BUILD-RUN nim compile -o="${OUT_FILE}" "${SRC_FILE}"
+	esac
+BUILD-END
+
